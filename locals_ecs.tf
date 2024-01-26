@@ -86,7 +86,7 @@ locals {
           },
           {
             name  = "db.port"
-            value = 27017
+            value = "27017"
           }
         ]
       }
