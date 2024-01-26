@@ -54,7 +54,7 @@ locals {
       storage_encrypted       = true
       deletion_protection     = false
       availability_zones = [
-        "sa-east-1a"
+        "us-east-1a"
       ]
     }
   }
