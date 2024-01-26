@@ -32,20 +32,20 @@ resource "aws_sqs_queue" "payment_created_queue_dlq" {
   sqs_managed_sse_enabled    = local.sqs.sqs_managed_sse_enabled
 }
 
-resource "aws_sns_topic_subscription" "get_payment_done_events" {
-  topic_arn            = data.aws_sns_topic.payment_created_topic.arn
+resource "aws_sns_topic_subscription" "payment_created_events" {
+  topic_arn            = aws_sns_topic.payment_created_topic.arn
   protocol             = local.subscription.cart_closed_topic.protocol
   endpoint             = aws_sqs_queue.payment_created_queue.arn
   raw_message_delivery = local.subscription.cart_closed_topic.raw_message_delivery
 
   depends_on = [
     aws_sqs_queue.payment_created_queue,
-    data.aws_sns_topic.payment_created_topic
+    aws_sns_topic.payment_created_topic
   ]
 }
 
-resource "aws_sqs_queue_policy" "payment_done_to_process_subscription" {
-  queue_url = aws_sqs_queue.cart_closed_queue.id
+resource "aws_sqs_queue_policy" "payment_created_to_process_subscription" {
+  queue_url = aws_sqs_queue.payment_created_queue.id
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -62,7 +62,7 @@ resource "aws_sqs_queue_policy" "payment_done_to_process_subscription" {
         ],
         Condition = {
           ArnEquals = {
-            "aws:SourceArn" : data.aws_sns_topic.payment_created_topic.arn
+            "aws:SourceArn" : aws_sns_topic.payment_created_topic.arn
           }
         }
       }
