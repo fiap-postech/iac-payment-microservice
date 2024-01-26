@@ -1,3 +1,24 @@
+resource "aws_s3_bucket" "cert_bucket" {
+  bucket        = local.documentdb.bucket.name
+  force_destroy = true
+
+  tags = {
+    Name = local.documentdb.bucket.name
+  }
+}
+
+resource "aws_s3_object" "static_content" {
+  for_each = fileset("./certs/", "**")
+
+  bucket        = aws_s3_bucket.cert_bucket.id
+  key           = each.value
+  source        = "./certs/${each.value}"
+  force_destroy = true
+  etag          = filemd5("./certs/${each.value}")
+
+  depends_on = [aws_s3_bucket.cert_bucket]
+}
+
 resource "aws_security_group" "documentdb_sg" {
   name        = local.documentdb.sg.name
   description = local.documentdb.sg.description

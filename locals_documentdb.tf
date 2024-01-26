@@ -24,6 +24,11 @@ locals {
       }
     }
 
+    bucket = {
+      name = "docdb-certs"
+      log  = "log-docdb-certs"
+    }
+
     cluster = {
       parameter_group = {
         name   = "${local.project_name}-cluster-parameter-group"
