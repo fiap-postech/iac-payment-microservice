@@ -37,7 +37,7 @@ locals {
       instance = {
         count             = 2
         instance_class    = "db.t3.medium"
-        identifier        = "instance-${local.project_name}-"
+        identifier        = "instance-${local.project_name}"
         apply_immediately = true
       }
 
