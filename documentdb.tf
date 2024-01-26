@@ -108,6 +108,14 @@ resource "aws_docdb_cluster" "docdb_cluster" {
   deletion_protection  = local.documentdb.cluster.deletion_protection
   availability_zones   = local.documentdb.cluster.availability_zones
 
+  lifecycle {
+    ignore_changes = [
+      cluster_identifier,
+      tags,
+      availability_zones
+    ]
+  }
+
   depends_on = [
     aws_db_subnet_group.docdb_subnet_group,
     aws_security_group.documentdb_sg,
@@ -124,6 +132,9 @@ resource "aws_docdb_cluster_instance" "approval_flow_instance" {
 
   lifecycle {
     prevent_destroy = false
+    ignore_changes = [
+      tags
+    ]
   }
 
   depends_on = [aws_docdb_cluster.docdb_cluster]

@@ -79,6 +79,14 @@ locals {
           {
             name  = "spring.profiles.active"
             value = "prod"
+          },
+          {
+            name  = "db.database"
+            value = "paymentdb"
+          },
+          {
+            name  = "db.port"
+            value = 27017
           }
         ]
       }

@@ -239,18 +239,22 @@ resource "aws_ecs_task_definition" "task_definition" {
         local.ecs.task_definition.container_definitions.environment,
         [
           {
-            name  = "spring.data.mongodb.host"
+            name  = "db.host"
             value = aws_docdb_cluster.docdb_cluster.endpoint
           },
           {
-            name  = "spring.data.mongodb.username"
+            name  = "db.username"
             value = local.documentdb.cluster.master_username
+          },
+          {
+            name = "payment-service.configuration.s3.mongo-ssl.bucket"
+            value = aws_s3_bucket.cert_bucket.name
           }
         ]
       )
       secrets = [
         {
-          name      = "spring.data.mongodb.password"
+          name      = "db.password"
           valueFrom = aws_secretsmanager_secret.app_database_password_secret.arn
         }
       ]
