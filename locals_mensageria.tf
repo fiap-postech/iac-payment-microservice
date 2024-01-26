@@ -25,4 +25,22 @@ locals {
       kms_master_key_id              = "alias/aws/sns"
     }
   }
+
+  subscription = {
+    cart_closed_topic = {
+      name                 = "prd-cart-closed-topic"
+      protocol             = "sqs"
+      raw_message_delivery = true
+    }
+  }
+
+  sqs = {
+    name                       = "prd-payment-cart-closed-queue"
+    delay_seconds              = 0
+    max_message_size           = 262144
+    message_retention_seconds  = 86400
+    receive_wait_time_seconds  = 0
+    visibility_timeout_seconds = 60
+    sqs_managed_sse_enabled    = true
+  }
 }
