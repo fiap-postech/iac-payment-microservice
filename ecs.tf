@@ -199,6 +199,17 @@ resource "aws_iam_role_policy" "service_execution_policy" {
           aws_secretsmanager_secret.app_database_password_secret.arn
         ]
       },
+      {
+        Sid    = "06"
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket",
+          "s3:GetObject"
+        ]
+        Resource = [
+          "*"
+        ]
+      }
     ]
   })
 
