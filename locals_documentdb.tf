@@ -54,7 +54,7 @@ locals {
       engine                  = "docdb"
       master_username         = "sys_${replace(local.project_name, "-", "_")}"
       master_secret_name      = "service/${local.context_name}/Database/Credential"
-      backup_retention_period = 0
+      backup_retention_period = 1
       skip_final_snapshot     = true
       storage_encrypted       = true
       deletion_protection     = false
