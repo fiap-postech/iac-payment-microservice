@@ -34,7 +34,7 @@ resource "aws_security_group" "documentdb_sg" {
       ipv6_cidr_blocks = local.documentdb.sg.ingress.ipv6_cidr_blocks
       prefix_list_ids  = local.documentdb.sg.ingress.prefix_list_ids
       security_groups = [
-        aws_security_group.alb_sg.id
+        aws_security_group.service_sg.id
       ]
       self = local.documentdb.sg.ingress.self
     }
@@ -53,7 +53,7 @@ resource "aws_security_group" "documentdb_sg" {
   }
 
   depends_on = [
-    aws_security_group.alb_sg
+    aws_security_group.service_sg
   ]
 }
 
