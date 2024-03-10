@@ -169,7 +169,8 @@ resource "aws_iam_role_policy" "service_execution_policy" {
         ],
         Effect = "Allow",
         Resource = [
-          aws_sqs_queue.cart_closed_queue.arn
+          aws_sqs_queue.purchase_payment_done_queue.arn,
+          aws_sqs_queue.purchase_payment_created_queue.arn
         ],
       },
       {
