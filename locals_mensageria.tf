@@ -2,7 +2,7 @@ locals {
 
   subscription = {
     payment_purchase_created = {
-      name                 = "prd-payment-purchase-created-topic"
+      name                 = "prd-purchase-created-topic"
       protocol             = "sqs"
       raw_message_delivery = true
     },
