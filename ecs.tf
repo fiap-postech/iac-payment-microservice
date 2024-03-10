@@ -169,7 +169,7 @@ resource "aws_iam_role_policy" "service_execution_policy" {
         ],
         Effect = "Allow",
         Resource = [
-          aws_sqs_queue.cart_closed_queue.arn
+          aws_sqs_queue.payment_purchase_created_queue.arn
         ],
       },
       {
@@ -179,8 +179,8 @@ resource "aws_iam_role_policy" "service_execution_policy" {
           "sns:Publish",
         ]
         Resource = [
-          aws_sns_topic.payment_done_topic.arn,
-          aws_sns_topic.payment_created_topic.arn
+          data.aws_sns_topic.payment_done.arn,
+          data.aws_sns_topic.payment_created.arn
         ]
       },
       {
