@@ -5,6 +5,16 @@ locals {
       name                 = "prd-payment-purchase-created-topic"
       protocol             = "sqs"
       raw_message_delivery = true
+    },
+    payment_done = {
+      name                 = "prd-payment-done-topic"
+      protocol             = "sqs"
+      raw_message_delivery = true
+    },
+    payment_created = {
+      name                 = "prd-payment-created-topic"
+      protocol             = "sqs"
+      raw_message_delivery = true
     }
   }
 

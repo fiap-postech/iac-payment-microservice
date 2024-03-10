@@ -68,9 +68,9 @@ data "aws_sns_topic" "payment_purchase_created" {
 }
 
 data "aws_sns_topic" "payment_done" {
-  name = "prd-payment-done-topic"
+  name = local.subscription.payment_done.name
 }
 
 data "aws_sns_topic" "payment_created" {
-  name = "prd-payment-created-topic"
+  name = local.subscription.payment_created.name
 }
