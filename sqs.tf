@@ -41,8 +41,8 @@ resource "aws_sns_topic_subscription" "get_payment_done_events" {
 
   depends_on = [
     aws_sqs_queue.purchase_payment_done_queue,
-    data.aws_sns_topic.payment_done,
-    aws_sns_topic.payment_done_topic
+    aws_sns_topic.payment_done_topic,
+    data.aws_sns_topic.payment_done
   ]
 }
 
@@ -116,8 +116,8 @@ resource "aws_sns_topic_subscription" "get_payment_created_events" {
 
   depends_on = [
     aws_sqs_queue.purchase_payment_created_queue,
-    data.aws_sns_topic.payment_created,
-    aws_sns_topic.payment_created_topic
+    aws_sns_topic.payment_created_topic,
+    data.aws_sns_topic.payment_created
   ]
 }
 
