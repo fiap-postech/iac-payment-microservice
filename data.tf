@@ -63,10 +63,14 @@ data "aws_apigatewayv2_vpc_link" "gateway_vpc_link" {
   vpc_link_id = var.vpc_link_id
 }
 
+data "aws_sns_topic" "payment_purchase_created" {
+  name = local.subscription.payment_purchase_created.name
+}
+
 data "aws_sns_topic" "payment_done" {
-  name = local.subscription.payment_done.name
+  name = "prd-payment-done-topic"
 }
 
 data "aws_sns_topic" "payment_created" {
-  name = local.subscription.payment_created.name
+  name = "prd-payment-created-topic"
 }
