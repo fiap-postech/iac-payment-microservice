@@ -26,21 +26,39 @@ locals {
     }
   }
 
+
   subscription = {
-    cart_closed_topic = {
-      name                 = "prd-cart-closed-topic"
+    payment_done = {
+      name                 = "prd-payment-done-topic"
+      protocol             = "sqs"
+      raw_message_delivery = true
+    }
+    payment_created = {
+      name                 = "prd-payment-created-topic"
       protocol             = "sqs"
       raw_message_delivery = true
     }
   }
 
+
   sqs = {
-    name                       = "prd-payment-cart-closed-queue"
-    delay_seconds              = 0
-    max_message_size           = 262144
-    message_retention_seconds  = 86400
-    receive_wait_time_seconds  = 0
-    visibility_timeout_seconds = 60
-    sqs_managed_sse_enabled    = true
+    payment_done = {
+      name                       = "prd-purchase-payment-done-queue"
+      delay_seconds              = 0
+      max_message_size           = 262144
+      message_retention_seconds  = 86400
+      receive_wait_time_seconds  = 0
+      visibility_timeout_seconds = 60
+      sqs_managed_sse_enabled    = true
+    },
+    payment_created = {
+      name                       = "prd-purchase-payment-created-queue"
+      delay_seconds              = 0
+      max_message_size           = 262144
+      message_retention_seconds  = 86400
+      receive_wait_time_seconds  = 0
+      visibility_timeout_seconds = 60
+      sqs_managed_sse_enabled    = true
+    }
   }
 }
