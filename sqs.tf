@@ -18,7 +18,8 @@ resource "aws_sqs_queue" "purchase_payment_done_queue" {
   })
 
   depends_on = [
-    aws_sqs_queue.purchase_payment_done_queue_dlq
+    aws_sqs_queue.purchase_payment_done_queue_dlq,
+    aws_sns_topic.payment_done_topic
   ]
 }
 
@@ -40,7 +41,8 @@ resource "aws_sns_topic_subscription" "get_payment_done_events" {
 
   depends_on = [
     aws_sqs_queue.purchase_payment_done_queue,
-    data.aws_sns_topic.payment_done
+    data.aws_sns_topic.payment_done,
+    aws_sns_topic.payment_done_topic
   ]
 }
 
@@ -91,7 +93,8 @@ resource "aws_sqs_queue" "purchase_payment_created_queue" {
   })
 
   depends_on = [
-    aws_sqs_queue.purchase_payment_created_queue_dlq
+    aws_sqs_queue.purchase_payment_created_queue_dlq,
+    aws_sns_topic.payment_created_topic
   ]
 }
 
@@ -113,7 +116,8 @@ resource "aws_sns_topic_subscription" "get_payment_created_events" {
 
   depends_on = [
     aws_sqs_queue.purchase_payment_created_queue,
-    data.aws_sns_topic.payment_created
+    data.aws_sns_topic.payment_created,
+    aws_sns_topic.payment_created_topic
   ]
 }
 
